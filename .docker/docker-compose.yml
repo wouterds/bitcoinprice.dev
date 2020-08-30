@@ -1,0 +1,26 @@
+version: '2.1'
+
+services:
+  node:
+    image: wouterds/bitcoinlive.dev:node
+    container_name: dev.bitcoinlive--node
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=reverse-proxy'
+      - 'traefik.http.middlewares.devbitcoinlive.redirectscheme.scheme=https'
+      - 'traefik.http.routers.devbitcoinlive-http.entrypoints=web'
+      - 'traefik.http.routers.devbitcoinlive-http.rule=Host(`bitcoinlive.dev`)'
+      - 'traefik.http.routers.devbitcoinlive-http.middlewares=devbitcoinlive'
+      - 'traefik.http.routers.devbitcoinlive-https.entrypoints=websecure'
+      - 'traefik.http.routers.devbitcoinlive-https.rule=Host(`bitcoinlive.dev`)'
+      - 'traefik.http.routers.devbitcoinlive-https.tls.certresolver=myhttpchallenge'
+    restart: unless-stopped
+    mem_limit: 32mb
+    volumes:
+      - ./data:/data
+    networks:
+      - reverse-proxy
+
+networks:
+  reverse-proxy:
+    external: true

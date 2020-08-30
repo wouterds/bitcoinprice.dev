@@ -4,11 +4,9 @@ import middlewares from './middlewares';
 import reqhand from './request-handlers';
 
 class Server {
-  private _host: string;
   private _port: number;
 
-  constructor(host: string, port: number) {
-    this._host = host;
+  constructor(port: number) {
     this._port = port;
   }
 
@@ -29,8 +27,8 @@ class Server {
     app.use('/api', apiRouter);
 
     return new Promise((resolve) => {
-      app.listen(this._port, this._host, () => {
-        console.log(`Running on http://${this._host}:${this._port} 🚀`);
+      app.listen(this._port, () => {
+        console.log(`Running on http://localhost:${this._port} 🚀`);
         resolve();
       });
     });

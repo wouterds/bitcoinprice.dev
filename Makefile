@@ -29,7 +29,9 @@ lint: node_modules
 	touch .build-app
 
 .build-node: .build-app ${DOCKERFILE_NODE}
-	docker build -f ${DOCKERFILE_NODE} -t ${TAG_NODE} .
+	docker build -f ${DOCKERFILE_NODE} \
+		--build-arg PORT=${PORT} \
+		-t ${TAG_NODE} .
 	touch .build-node
 
 build: .build-node

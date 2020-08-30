@@ -47,7 +47,9 @@ docker-login:
 
 push: build docker-login
 	docker push ${TAG_NODE}
+	docker push ${TAG_NGINX}
 	docker push ${TAG_NODE}-${VERSION}
+	docker push ${TAG_NGINX}-${VERSION}
 
 deploy:
 	ssh ${DEPLOY_USER}@${DEPLOY_HOST} "mkdir -p ${DEPLOY_PATH}"

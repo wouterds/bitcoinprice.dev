@@ -27,6 +27,7 @@ lint: node_modules
 
 .build-node: .build-app ${DOCKERFILE_NODE}
 	docker build -f ${DOCKERFILE_NODE} \
+		--build-arg HOST=${HOST} \
 		--build-arg PORT=${PORT} \
 		-t ${TAG_NODE} .
 	touch .build-node

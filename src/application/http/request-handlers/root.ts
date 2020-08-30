@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import fetch from 'node-fetch';
 
 const root = async (_req: Request, res: Response): Promise<void> => {
-  const response = await fetch('https://www.blockchain.com/ticker');
-  const data = await response.json();
-  const price = data?.USD?.last;
+  const response = await fetch('https://www.blockchain.com/ticker').catch();
+  const data = await response?.json();
+  const price = data?.USD?.last || null;
 
   let body = '';
   body += '<!DOCTYPE html>';

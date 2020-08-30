@@ -1,9 +1,9 @@
 version: '2.1'
 
 services:
-  node:
-    image: wouterds/bitcoinlive.dev:node
-    container_name: dev.bitcoinlive--node
+  nginx:
+    image: wouterds/bitcoinlive.dev:nginx
+    container_name: dev.bitcoinlive--nginx
     labels:
       - 'traefik.enable=true'
       - 'traefik.docker.network=reverse-proxy'
@@ -15,9 +15,15 @@ services:
       - 'traefik.http.routers.devbitcoinlive-https.rule=Host(`bitcoinlive.dev`)'
       - 'traefik.http.routers.devbitcoinlive-https.tls.certresolver=myhttpchallenge'
     restart: unless-stopped
-    mem_limit: 32mb
+    mem_limit: 8mb
     networks:
       - reverse-proxy
+
+  node:
+    image: wouterds/bitcoinlive.dev:node
+    container_name: dev.bitcoinlive--node
+    restart: unless-stopped
+    mem_limit: 32mb
 
 networks:
   reverse-proxy:

@@ -1,0 +1,33 @@
+{
+  "name": "bitcoin-live",
+  "version": "0.0.1",
+  "repository": "github:wouterds/bitcoinlive.dev",
+  "scripts": {
+    "start": "cd ./dist && node -r ./bootstrap.js ./main.js",
+    "dev": "nodemon",
+    "build": "tsc",
+    "lint": "eslint --ext '.ts, js' . && tsc",
+    "lint:fix": "eslint --ext '.ts, js' --fix ."
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "tsconfig-paths": "^3.9.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.7",
+    "@types/node": "^14.6.2",
+    "@typescript-eslint/eslint-plugin": "^3.10.1",
+    "@typescript-eslint/parser": "^3.10.1",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-simple-import-sort": "^5.0.3",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.13",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.1.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
+  }
+}

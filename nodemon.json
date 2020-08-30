@@ -1,0 +1,5 @@
+{
+  "watch": ["src", ".env"],
+  "exec": "ts-node -r ./src/bootstrap.ts ./src/main.ts",
+  "ext": "ts,json,env"
+}

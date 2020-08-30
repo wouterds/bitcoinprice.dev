@@ -1,0 +1,18 @@
+version: '2.1'
+
+services:
+  nginx:
+    image: wouterds/bitcoinlive.dev:nginx
+    container_name: dev.bitcoinlive--nginx
+    restart: unless-stopped
+    mem_limit: 32mb
+    ports:
+      - "80:80"
+
+  node:
+    image: wouterds/bitcoinlive.dev:node
+    container_name: dev.bitcoinlive--node
+    restart: unless-stopped
+    mem_limit: 32mb
+    ports:
+      - "4000:4000"

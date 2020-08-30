@@ -23,9 +23,10 @@ connection.on('open', () => {
 connection.onmessage = (e: { data: any }) => {
   const data = JSON.parse(e.data);
 
-  const price = data?.price || null;
+  const price = parseFloat(data?.price)?.toFixed(2) || null;
 
   if (price) {
+    redisClient.set('ticker.coinbase', price, 'EX', 60);
     redisClient.hset('ticker', 'coinbase', price);
   }
 };

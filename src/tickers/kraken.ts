@@ -22,9 +22,10 @@ connection.onmessage = (e: { data: any }) => {
     data?.[2] === 'ticker' &&
     data?.[3] === 'XBT/USD'
   ) {
-    const price = data[1]?.c?.[0] || null;
+    const price = parseFloat(data[1]?.c?.[0])?.toFixed(2) || null;
 
     if (price) {
+      redisClient.set('ticker.kraken', price, 'EX', 60);
       redisClient.hset('ticker', 'kraken', price);
     }
   }

@@ -26,6 +26,12 @@ services:
     restart: unless-stopped
     mem_limit: 32mb
 
+  redis:
+    image: redis:6
+    container_name: dev.bitcoinprice--redis
+    restart: unless-stopped
+    mem_limit: 4mb
+
 networks:
   reverse-proxy:
     external: true

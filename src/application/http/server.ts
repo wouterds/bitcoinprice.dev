@@ -1,6 +1,6 @@
 import express from 'express';
 
-import rhandlers from './request-handlers';
+import reqhand from './request-handlers';
 
 class Server {
   private _host: string;
@@ -14,7 +14,12 @@ class Server {
   async start(): Promise<void> {
     const app = express();
 
-    app.get('/', rhandlers.root);
+    app.get('/', reqhand.root);
+    app.get('/api', reqhand.api.root);
+    app.get('/api/24h', reqhand.api.day.avg);
+    app.get('/api/24h/current', reqhand.api.day.current);
+    app.get('/api/24h/max', reqhand.api.day.max);
+    app.get('/api/24h/min', reqhand.api.day.min);
 
     return new Promise((resolve) => {
       app.listen(this._port, this._host, () => {

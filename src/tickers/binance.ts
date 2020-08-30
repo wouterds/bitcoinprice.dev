@@ -8,5 +8,9 @@ const redisClient = redis.createClient();
 connection.onmessage = (e: { data: any }) => {
   const { data } = JSON.parse(e.data);
 
-  redisClient.hset('ticker', 'binance', data.p);
+  const price = data?.p || null;
+
+  if (price) {
+    redisClient.hset('ticker', 'binance', data.p);
+  }
 };

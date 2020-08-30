@@ -29,7 +29,6 @@ lint: node_modules
 
 .build-node: .build-app ${DOCKERFILE_NODE}
 	docker build -f ${DOCKERFILE_NODE} \
-		--build-arg HOST=${HOST} \
 		--build-arg PORT=${PORT} \
 		--build-arg APP_HOST=${APP_HOST} \
 		--build-arg API_HOST=${API_HOST} \

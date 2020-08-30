@@ -8,7 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HOST: ${{ secrets.HOST }}
       PORT: ${{ secrets.PORT }}
       APP_HOST: ${{ secrets.APP_HOST }}
       API_HOST: ${{ secrets.API_HOST }}

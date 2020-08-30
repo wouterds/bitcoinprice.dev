@@ -10,6 +10,8 @@ jobs:
     env:
       HOST: ${{ secrets.HOST }}
       PORT: ${{ secrets.PORT }}
+      APP_HOST: ${{ secrets.APP_HOST }}
+      API_HOST: ${{ secrets.API_HOST }}
       DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
       DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
       DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}

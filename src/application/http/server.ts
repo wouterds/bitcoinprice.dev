@@ -20,7 +20,7 @@ class Server {
     const apiRouter = express.Router();
     apiRouter.use(middlewares.api);
     apiRouter.get('', reqhand.api.root);
-    apiRouter.get('/24h', reqhand.api.day.avg);
+    apiRouter.get('/24h/avg', reqhand.api.day.avg);
     apiRouter.get('/24h/max', reqhand.api.day.max);
     apiRouter.get('/24h/min', reqhand.api.day.min);
     app.use('/api', apiRouter);

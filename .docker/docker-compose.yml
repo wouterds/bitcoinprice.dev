@@ -16,8 +16,6 @@ services:
       - 'traefik.http.routers.devbitcoinlive-https.tls.certresolver=myhttpchallenge'
     restart: unless-stopped
     mem_limit: 32mb
-    volumes:
-      - ./data:/data
     networks:
       - reverse-proxy
 

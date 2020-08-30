@@ -1,7 +1,9 @@
 import api from './api';
 import root from './root';
 
-export default {
+const requestHandlers = {
   api,
   root,
 };
+
+export default requestHandlers;

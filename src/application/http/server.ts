@@ -1,4 +1,6 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+
+import rhandlers from './request-handlers';
 
 class Server {
   private _host: string;
@@ -12,9 +14,7 @@ class Server {
   async start(): Promise<void> {
     const app = express();
 
-    app.get('/', (_req: Request, res: Response) => {
-      res.send('Hello World!');
-    });
+    app.get('/', rhandlers.root);
 
     return new Promise((resolve) => {
       app.listen(this._port, this._host, () => {

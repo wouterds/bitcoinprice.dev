@@ -14,12 +14,14 @@ class Server {
   async start(): Promise<void> {
     const app = express();
 
+    const apiRouter = express.Router();
+    apiRouter.get('', reqhand.api.root);
+    apiRouter.get('/24h', reqhand.api.day.avg);
+    apiRouter.get('/24h/current', reqhand.api.day.current);
+    apiRouter.get('/24h/max', reqhand.api.day.max);
+    apiRouter.get('/24h/min', reqhand.api.day.min);
     app.get('/', reqhand.root);
-    app.get('/api', reqhand.api.root);
-    app.get('/api/24h', reqhand.api.day.avg);
-    app.get('/api/24h/current', reqhand.api.day.current);
-    app.get('/api/24h/max', reqhand.api.day.max);
-    app.get('/api/24h/min', reqhand.api.day.min);
+    app.use(apiRouter);
 
     return new Promise((resolve) => {
       app.listen(this._port, this._host, () => {

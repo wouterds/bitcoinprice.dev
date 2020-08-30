@@ -3,9 +3,11 @@ VERSION = $(shell cat package.json | grep "\"version\"" | sed -e 's/^.*: "\(.*\)
 
 DOCKER_COMPOSE = ./.docker/docker-compose.yml
 DOCKERFILE_NODE = ./.docker/node/Dockerfile
+DOCKERFILE_NGINX = ./.docker/nginx/Dockerfile
 
 TAG_PREFIX = wouterds/bitcoinlive.dev
 TAG_NODE = ${TAG_PREFIX}:node
+TAG_NGINX = ${TAG_PREFIX}:nginx
 
 all: build
 
@@ -32,8 +34,13 @@ lint: node_modules
 		-t ${TAG_NODE} .
 	touch .build-node
 
-build: .build-node
+.build-nginx: ${DOCKERFILE_NGINX}
+	docker build -f ${DOCKERFILE_NGINX} -t ${TAG_NGINX} .
+	touch .build-nginx
+
+build: .build-node .build-nginx
 	docker tag ${TAG_NODE} ${TAG_NODE}-${VERSION}
+	docker tag ${TAG_NGINX} ${TAG_NGINX}-${VERSION}
 
 docker-login:
 	docker login -u ${DOCKER_REGISTRY_USER} -p ${DOCKER_REGISTRY_PASS}

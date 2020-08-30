@@ -1,4 +1,4 @@
-# bitcoinlive.dev
+# bitcoinprice.dev
 
 ## Setup
 

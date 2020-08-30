@@ -2,18 +2,18 @@ version: '2.1'
 
 services:
   nginx:
-    image: wouterds/bitcoinlive.dev:nginx
-    container_name: dev.bitcoinlive--nginx
+    image: wouterds/bitcoinprice.dev:nginx
+    container_name: dev.bitcoinprice--nginx
     labels:
       - 'traefik.enable=true'
       - 'traefik.docker.network=reverse-proxy'
-      - 'traefik.http.middlewares.devbitcoinlive.redirectscheme.scheme=https'
-      - 'traefik.http.routers.devbitcoinlive-http.entrypoints=web'
-      - 'traefik.http.routers.devbitcoinlive-http.rule=Host(`bitcoinlive.dev`,`api.bitcoinlive.dev`)'
-      - 'traefik.http.routers.devbitcoinlive-http.middlewares=devbitcoinlive'
-      - 'traefik.http.routers.devbitcoinlive-https.entrypoints=websecure'
-      - 'traefik.http.routers.devbitcoinlive-https.rule=Host(`bitcoinlive.dev`,`api.bitcoinlive.dev`)'
-      - 'traefik.http.routers.devbitcoinlive-https.tls.certresolver=myhttpchallenge'
+      - 'traefik.http.middlewares.devbitcoinprice.redirectscheme.scheme=https'
+      - 'traefik.http.routers.devbitcoinprice-http.entrypoints=web'
+      - 'traefik.http.routers.devbitcoinprice-http.rule=Host(`bitcoinprice.dev`,`api.bitcoinprice.dev`)'
+      - 'traefik.http.routers.devbitcoinprice-http.middlewares=devbitcoinprice'
+      - 'traefik.http.routers.devbitcoinprice-https.entrypoints=websecure'
+      - 'traefik.http.routers.devbitcoinprice-https.rule=Host(`bitcoinprice.dev`,`api.bitcoinprice.dev`)'
+      - 'traefik.http.routers.devbitcoinprice-https.tls.certresolver=myhttpchallenge'
     restart: unless-stopped
     mem_limit: 8mb
     networks:
@@ -21,8 +21,8 @@ services:
       - reverse-proxy
 
   node:
-    image: wouterds/bitcoinlive.dev:node
-    container_name: dev.bitcoinlive--node
+    image: wouterds/bitcoinprice.dev:node
+    container_name: dev.bitcoinprice--node
     restart: unless-stopped
     mem_limit: 32mb
 

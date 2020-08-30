@@ -5,7 +5,7 @@ DOCKER_COMPOSE = ./.docker/docker-compose.yml
 DOCKERFILE_NODE = ./.docker/node/Dockerfile
 DOCKERFILE_NGINX = ./.docker/nginx/Dockerfile
 
-TAG_PREFIX = wouterds/bitcoinlive.dev
+TAG_PREFIX = wouterds/bitcoinprice.dev
 TAG_NODE = ${TAG_PREFIX}:node
 TAG_NGINX = ${TAG_PREFIX}:nginx
 

@@ -1,7 +1,7 @@
 {
-  "name": "bitcoin-live",
+  "name": "bitcoinprice-dev",
   "version": "0.0.1",
-  "repository": "github:wouterds/bitcoinlive.dev",
+  "repository": "github:wouterds/bitcoinprice.dev",
   "scripts": {
     "start": "cd ./dist && node -r ./bootstrap.js ./main.js",
     "dev": "nodemon",

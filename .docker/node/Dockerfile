@@ -12,7 +12,12 @@ WORKDIR /code
 
 COPY --from=builder /code /code
 
+ARG HOST
 ARG PORT
+
+ENV HOST=$HOST
+ENV PORT=$PORT
+
 EXPOSE $PORT
 
 CMD ["yarn", "start"]

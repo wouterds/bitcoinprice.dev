@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import redis from 'redis';
 import { promisify } from 'util';
 
-const redisClient = redis.createClient();
+const redisClient = redis.createClient({ host: 'redis' });
 const getAsync = promisify(redisClient.hgetall).bind(redisClient);
 
 const root = async (_req: Request, res: Response): Promise<void> => {

@@ -3,7 +3,7 @@ import { promisify } from 'util';
 import WebSocket from 'ws';
 
 (async () => {
-  const redisClient = redis.createClient();
+  const redisClient = redis.createClient({ host: 'redis' });
   const getAsync = promisify(redisClient.get).bind(redisClient);
 
   const data = await getAsync('ticker.binance');

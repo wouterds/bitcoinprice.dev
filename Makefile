@@ -22,10 +22,7 @@ lint: node_modules
 	docker run --rm -v ${PWD}:/code -w /code node:14-alpine yarn lint
 
 .build-app: node_modules
-	docker run --rm -v $(PWD):/code -w /code \
-			-e HOST \
-			-e PORT \
-		node:14-alpine yarn build
+	docker run --rm -v $(PWD):/code -w /code node:14-alpine yarn build
 	touch .build-app
 
 .build-node: .build-app ${DOCKERFILE_NODE}

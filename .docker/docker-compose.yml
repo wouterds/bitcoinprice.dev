@@ -9,10 +9,10 @@ services:
       - 'traefik.docker.network=reverse-proxy'
       - 'traefik.http.middlewares.devbitcoinlive.redirectscheme.scheme=https'
       - 'traefik.http.routers.devbitcoinlive-http.entrypoints=web'
-      - 'traefik.http.routers.devbitcoinlive-http.rule=Host(`bitcoinlive.dev`)'
+      - 'traefik.http.routers.devbitcoinlive-http.rule=Host(`bitcoinlive.dev`,`api.bitcoinlive.dev`)'
       - 'traefik.http.routers.devbitcoinlive-http.middlewares=devbitcoinlive'
       - 'traefik.http.routers.devbitcoinlive-https.entrypoints=websecure'
-      - 'traefik.http.routers.devbitcoinlive-https.rule=Host(`bitcoinlive.dev`)'
+      - 'traefik.http.routers.devbitcoinlive-https.rule=Host(`bitcoinlive.dev`,`api.bitcoinlive.dev`)'
       - 'traefik.http.routers.devbitcoinlive-https.tls.certresolver=myhttpchallenge'
     restart: unless-stopped
     mem_limit: 8mb

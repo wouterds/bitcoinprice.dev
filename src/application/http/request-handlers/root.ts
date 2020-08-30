@@ -1,36 +1,41 @@
 import { Request, Response } from 'express';
+import fetch from 'node-fetch';
 
-const root = (_req: Request, res: Response): void => {
-  let response = '';
-  response += '<!DOCTYPE html>';
-  response += '<html lang="en">';
-  response += '<head>';
-  response += '<meta charset="utf-8">';
-  response += '<title>bitcoinlive.dev</title>';
-  response += '</head>';
-  response += '<body>';
-  response += '<pre>';
-  response +=
-    '  _     _ _            _       _ _                _            <br>';
-  response +=
-    ' | |   (_) |          (_)     | (_)              | |           <br>';
-  response +=
-    ' | |__  _| |_ ___ ___  _ _ __ | |___   _____   __| | _____   __<br>';
-  response +=
+const root = async (_req: Request, res: Response): Promise<void> => {
+  const response = await fetch('https://www.blockchain.com/ticker');
+  const data = await response.json();
+  const price = data?.USD?.last;
+
+  let body = '';
+  body += '<!DOCTYPE html>';
+  body += '<html lang="en">';
+  body += '<head>';
+  body += '<meta charset="utf-8">';
+  body += '<title>bitcoinlive.dev</title>';
+  body += '</head>';
+  body += '<body>';
+  body += '<pre>';
+  body += '  _     _ _            _       _ _                _            <br>';
+  body += ' | |   (_) |          (_)     | (_)              | |           <br>';
+  body += ' | |__  _| |_ ___ ___  _ _ __ | |___   _____   __| | _____   __<br>';
+  body +=
     " | '_ \\| | __/ __/ _ \\| | '_ \\| | \\ \\ / / _ \\ / _` |/ _ \\ \\ / /<br>";
-  response +=
+  body +=
     ' | |_) | | || (_| (_) | | | | | | |\\ V /  __/| (_| |  __/\\ V / <br>';
-  response +=
+  body +=
     ' |_.__/|_|\\__\\___\\___/|_|_| |_|_|_| \\_/ \\___(_)__,_|\\___| \\_/  <br>';
-  response +=
-    '                                                               <br>';
-  response += ' --------------------------------------------------------------';
-  response += '</pre>';
-  response += '</body>';
-  response += '</html>';
+  body += '                                                               <br>';
+  body += ' --------------------------------------------------------------<br>';
+  if (price) {
+    body += '<br>';
+    body += ` 1 Bitcoin = $${price}`;
+  }
+  body += '</pre>';
+  body += '</body>';
+  body += '</html>';
 
   res.setHeader('content-type', 'text/html');
-  res.send(response);
+  res.send(body);
 };
 
 export default root;

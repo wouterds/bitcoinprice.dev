@@ -1,10 +1,20 @@
 import { Request, Response } from 'express';
-import fetch from 'node-fetch';
+import redis from 'redis';
+import { promisify } from 'util';
+
+const redisClient = redis.createClient();
+const getAsync = promisify(redisClient.hgetall).bind(redisClient);
 
 const root = async (_req: Request, res: Response): Promise<void> => {
-  const response = await fetch('https://www.blockchain.com/ticker').catch();
-  const data = await response?.json();
-  const price = data?.USD?.last || null;
+  const data = await getAsync('ticker');
+
+  const values = Object.values(data);
+  const price = (
+    values.reduce(
+      (total: number, value: string) => total + parseFloat(value),
+      0,
+    ) / values.length
+  ).toFixed(2);
 
   let body = '';
   body += '<!DOCTYPE html>';

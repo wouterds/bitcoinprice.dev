@@ -17,6 +17,7 @@ services:
     restart: unless-stopped
     mem_limit: 8mb
     networks:
+      - default
       - reverse-proxy
 
   node:

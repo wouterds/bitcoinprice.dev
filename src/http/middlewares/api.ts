@@ -6,7 +6,7 @@ const apiMiddleware = async (
   next: NextFunction,
 ): Promise<void> => {
   if (
-    req.host !== process.env.API_HOST &&
+    req.hostname !== process.env.API_HOST &&
     req.headers?.['x-forwarded-host'] !== process.env.API_HOST
   ) {
     res.sendStatus(403);

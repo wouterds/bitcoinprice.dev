@@ -17,42 +17,40 @@ const root = async (_req: Request, res: Response): Promise<void> => {
   ).toFixed(2);
 
   let body = '';
-  body += '<!DOCTYPE html>';
-  body += '<html lang="en">';
-  body += '<head>';
-  body += '<meta charset="utf-8">';
-  body += '<title>bitcoinprice.dev</title>';
-  body += '</head>';
-  body += '<body>';
-  body += '<pre>';
   body +=
-    '  _     _ _            _                  _               _            <br>';
+    '   _     _ _            _                  _               _            \n';
   body +=
-    ' | |   (_) |          (_)                (_)             | |           <br>';
+    '  | |   (_) |          (_)                (_)             | |           \n';
   body +=
-    ' | |__  _| |_ ___ ___  _ _ __  _ __  _ __ _  ___ ___   __| | _____   __<br>';
+    '  | |__  _| |_ ___ ___  _ _ __  _ __  _ __ _  ___ ___   __| | _____   __\n';
   body +=
-    " | '_ \\| | __/ __/ _ \\| | '_ \\| '_ \\| '__| |/ __/ _ \\ / _` |/ _ \\ \\ / /<br>";
+    "  | '_ \\| | __/ __/ _ \\| | '_ \\| '_ \\| '__| |/ __/ _ \\ / _` |/ _ \\ \\ / /\n";
   body +=
-    ' | |_) | | || (_| (_) | | | | | |_) | |  | | (_|  __/| (_| |  __/\\ V / <br>';
+    '  | |_) | | || (_| (_) | | | | | |_) | |  | | (_|  __/| (_| |  __/\\ V / \n';
   body +=
-    ' |_.__/|_|\\__\\___\\___/|_|_| |_| .__/|_|  |_|\\___\\___(_)__,_|\\___| \\_/  <br>';
+    '  |_.__/|_|\\__\\___\\___/|_|_| |_| .__/|_|  |_|\\___\\___(_)__,_|\\___| \\_/  \n';
   body +=
-    '                              | |                                      <br>';
+    '                               | |                                      \n';
   body +=
-    '                              |_|                                      <br>';
-  body += '                                                               <br>';
-  body +=
-    ' ----------------------------------------------------------------------<br>';
-  if (price) {
-    body += '<br>';
-    body += ` 1 Bitcoin = $${price}`;
-  }
-  body += '</pre>';
-  body += '</body>';
-  body += '</html>';
+    '                               |_|                                      \n';
+  body += '\n';
+  body += 'Formula:\n';
+  body += '    (kraken + coinbase pro + binance) / 3\n';
+  body += '\n';
 
-  res.setHeader('content-type', 'text/html');
+  if (data) {
+    body += 'Exchange prices:\n';
+    for (const [exchange, value] of Object.entries(data)) {
+      body += `    ${exchange}: $${value}\n`;
+    }
+    body += '\n';
+  }
+
+  if (price) {
+    body += `1 BTC = ${price} USD`;
+  }
+
+  res.setHeader('content-type', 'text/plain');
   res.send(body);
 };
 

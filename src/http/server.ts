@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import express from 'express';
 
 import middlewares from './middlewares';
@@ -27,7 +28,9 @@ class Server {
 
     return new Promise((resolve) => {
       app.listen(this._port, () => {
-        console.log(`Running on http://localhost:${this._port} 🚀`);
+        console.log(
+          chalk.green(`Running on http://localhost:${this._port} 🚀`),
+        );
         resolve();
       });
     });

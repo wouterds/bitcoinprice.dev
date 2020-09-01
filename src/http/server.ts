@@ -16,14 +16,12 @@ class Server {
 
     const router = express.Router();
     router.get('/', requestHandlers.root);
-    app.use(router);
 
     const apiRouter = express.Router();
     apiRouter.use(middlewares.api);
     apiRouter.get('', requestHandlers.api.root);
-    apiRouter.get('/24h/avg', requestHandlers.api.day.avg);
-    apiRouter.get('/24h/max', requestHandlers.api.day.max);
-    apiRouter.get('/24h/min', requestHandlers.api.day.min);
+
+    app.use(router);
     app.use('/api', apiRouter);
 
     return new Promise((resolve) => {

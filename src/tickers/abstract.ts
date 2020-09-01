@@ -1,9 +1,6 @@
 import chalk from 'chalk';
 import redis from 'services/redis';
-import { promisify } from 'util';
 import WebSocket from 'ws';
-
-const get = promisify(redis.get).bind(redis);
 
 interface AbstractTickerOptions {
   source: string;
@@ -90,7 +87,7 @@ abstract class AbstractTicker {
       `[${chalk.magenta('ticker')}][${chalk.yellow(this.source)}] starting`,
     );
 
-    const data = await get(`ticker.${this.source}`);
+    const data = await redis.get(`ticker.${this.source}`);
     if (data) {
       console.error(
         chalk.red(

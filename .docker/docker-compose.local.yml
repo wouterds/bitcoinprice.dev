@@ -5,7 +5,7 @@ services:
     image: wouterds/bitcoinprice.dev:nginx
     container_name: dev.bitcoinprice--nginx
     restart: unless-stopped
-    mem_limit: 32mb
+    mem_limit: 8mb
     ports:
       - "80:80"
 
@@ -13,6 +13,12 @@ services:
     image: wouterds/bitcoinprice.dev:node
     container_name: dev.bitcoinprice--node
     restart: unless-stopped
-    mem_limit: 32mb
+    mem_limit: 64mb
+
+  redis:
+    image: redis:6
+    container_name: dev.bitcoinprice--redis
+    restart: unless-stopped
+    mem_limit: 8mb
     ports:
-      - "4000:4000"
+      - "6379:6379"

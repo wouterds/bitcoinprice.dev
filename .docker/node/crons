@@ -6,6 +6,6 @@
 # |  |  |  |  |
 # *  *  *  *  *  command to be executed
 
-* * * * * cd /code && node ./dist/tickers/binance.js
-* * * * * cd /code && node ./dist/tickers/coinbase.js
-* * * * * cd /code && node ./dist/tickers/kraken.js
+* * * * * node /code/dist/tickers/binance.js
+* * * * * node /code/dist/tickers/coinbase.js
+* * * * * node /code/dist/tickers/kraken.js

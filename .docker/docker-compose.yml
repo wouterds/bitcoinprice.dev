@@ -24,13 +24,13 @@ services:
     image: wouterds/bitcoinprice.dev:node
     container_name: dev.bitcoinprice--node
     restart: unless-stopped
-    mem_limit: 32mb
+    mem_limit: 64mb
 
   redis:
     image: redis:6
     container_name: dev.bitcoinprice--redis
     restart: unless-stopped
-    mem_limit: 4mb
+    mem_limit: 8mb
 
 networks:
   reverse-proxy:

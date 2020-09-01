@@ -44,6 +44,10 @@ const root = async (_req: Request, res: Response): Promise<void> => {
     body += '\n';
   }
 
+  body += 'API endpoints:\n';
+  body += `    https://${process.env.API_HOST}\n`;
+  body += '\n';
+
   if (price) {
     body += `1 BTC = ${price} USD`;
   }

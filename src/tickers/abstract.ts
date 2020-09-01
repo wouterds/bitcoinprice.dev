@@ -1,10 +1,9 @@
 import chalk from 'chalk';
-import redis from 'redis';
+import redis from 'services/redis';
 import { promisify } from 'util';
 import WebSocket from 'ws';
 
-const redisClient = redis.createClient({ host: 'redis' });
-const get = promisify(redisClient.get).bind(redisClient);
+const get = promisify(redis.get).bind(redis);
 
 interface AbstractTickerOptions {
   source: string;
@@ -76,8 +75,8 @@ abstract class AbstractTicker {
       return;
     }
 
-    redisClient.set(`ticker.${this.source}`, price, 'EX', this.ttl);
-    redisClient.hset('ticker', this.source, price);
+    redis.set(`ticker.${this.source}`, price, 'EX', this.ttl);
+    redis.hset('ticker', this.source, price);
 
     console.log(
       `[${chalk.magenta('ticker')}][${chalk.yellow(

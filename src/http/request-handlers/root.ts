@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
-import redis from 'redis';
+import redis from 'services/redis';
 import { promisify } from 'util';
 
-const redisClient = redis.createClient({ host: 'redis' });
-const getAsync = promisify(redisClient.hgetall).bind(redisClient);
+const getAsync = promisify(redis.hgetall).bind(redis);
 
 const root = async (_req: Request, res: Response): Promise<void> => {
   const data = await getAsync('ticker');

@@ -1,5 +1,5 @@
 #!/bin/sh
 
-crond -f
+crond
 
 yarn start

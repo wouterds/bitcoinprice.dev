@@ -4,7 +4,9 @@
   "repository": "github:wouterds/bitcoinprice.dev",
   "scripts": {
     "start": "cd ./dist && node -r ./bootstrap.js ./main.js",
-    "dev": "nodemon",
+    "dev:docker:start": "docker-compose -f $(npm prefix)/.docker/docker-compose.dev.yml up -d --remove-orphans",
+    "dev:node": "nodemon",
+    "dev": "yarn dev:docker:start && sleep 3 && yarn dev:node",
     "build": "tsc",
     "lint": "eslint --ext '.ts, js' . && tsc",
     "lint:fix": "eslint --ext '.ts, js' --fix ."

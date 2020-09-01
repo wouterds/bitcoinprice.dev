@@ -6,6 +6,6 @@
 # |  |  |  |  |
 # *  *  *  *  *  command to be executed
 
-* * * * * node /code/dist/tickers/binance.js
-* * * * * node /code/dist/tickers/coinbase.js
-* * * * * node /code/dist/tickers/kraken.js
+* * * * * cd /code/dist && node -r ./bootstrap.js ./tickers/binance.js
+* * * * * cd /code/dist && node -r ./bootstrap.js ./tickers/coinbase.js
+* * * * * cd /code/dist && node -r ./bootstrap.js ./tickers/kraken.js

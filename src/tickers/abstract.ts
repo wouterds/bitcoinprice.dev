@@ -60,10 +60,6 @@ abstract class AbstractTicker {
   };
 
   public start = async (): Promise<void> => {
-    console.log(
-      `[${chalk.magenta('ticker')}][${chalk.yellow(this.source)}] starting`,
-    );
-
     if (this.endpoint.substr(0, 6) !== 'wss://') {
       console.log(
         chalk.red(
@@ -77,7 +73,7 @@ abstract class AbstractTicker {
 
     const data = await redis.get(`ticker.${this.source}`);
     if (data) {
-      console.error(
+      console.log(
         chalk.red(
           `[${chalk.magenta('ticker')}][${chalk.yellow(
             this.source,
@@ -86,6 +82,10 @@ abstract class AbstractTicker {
       );
       process.exit(0);
     }
+
+    console.log(
+      `[${chalk.magenta('ticker')}][${chalk.yellow(this.source)}] starting`,
+    );
 
     const connection = new WebSocket(this.endpoint);
     connection.on('open', () => {

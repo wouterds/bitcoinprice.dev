@@ -33,7 +33,9 @@ const root = async (_req: Request, res: Response): Promise<void> => {
   body += '    — a hyperfast realtime Bitcoin price API without rate limits\n';
   body += '\n';
   body += 'Formula:\n';
-  body += '    (kraken + coinbase pro + binance + bitstamp) / 4\n';
+  body += `    (${Object.keys(data).join(' + ')}) / ${
+    Object.keys(data).length
+  }\n`;
   body += '\n';
 
   if (data) {

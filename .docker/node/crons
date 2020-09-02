@@ -9,3 +9,4 @@
 * * * * * cd /code/dist && node -r ./bootstrap.js ./tickers/binance.js > /proc/1/fd/1
 * * * * * cd /code/dist && node -r ./bootstrap.js ./tickers/coinbase.js > /proc/1/fd/1
 * * * * * cd /code/dist && node -r ./bootstrap.js ./tickers/kraken.js > /proc/1/fd/1
+* * * * * cd /code/dist && node -r ./bootstrap.js ./tickers/bitstamp.js > /proc/1/fd/1

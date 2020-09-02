@@ -1,6 +1,14 @@
 import AbstractTicker from './abstract';
 
 class BinanceTicker extends AbstractTicker {
+  get source(): string {
+    return 'binance';
+  }
+
+  get endpoint(): string {
+    return 'wss://fstream.binance.com/stream?streams=btcusdt@markPrice';
+  }
+
   parsePrice = (json: any): string => {
     if (!json) {
       return '';
@@ -16,9 +24,4 @@ class BinanceTicker extends AbstractTicker {
   };
 }
 
-const ticker = new BinanceTicker({
-  source: 'binance',
-  ws: 'wss://fstream.binance.com/stream?streams=btcusdt@markPrice',
-});
-
-ticker.start();
+new BinanceTicker().start();

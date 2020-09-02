@@ -2,41 +2,18 @@ import chalk from 'chalk';
 import redis from 'services/redis';
 import WebSocket from 'ws';
 
-interface AbstractTickerOptions {
-  source: string;
-  ws: string;
-  ttl?: number;
-  subscriptionMessage?: any;
-}
-
 abstract class AbstractTicker {
-  private ws: string;
-  private source: string;
-  private ttl: number;
-  private subscriptionMessage: any;
+  abstract get source(): string;
+  abstract get endpoint(): string;
+  abstract parsePrice: (json: any) => string;
 
-  constructor(options: AbstractTickerOptions) {
-    const { source, ws, ttl = 60, subscriptionMessage } = options;
-    console.log(`[${chalk.magenta('ticker')}][${chalk.yellow(source)}] init`);
-
-    if (ws.substr(0, 6) !== 'wss://') {
-      console.log(
-        chalk.red(
-          `[${chalk.magenta('ticker')}][${chalk.yellow(
-            source,
-          )}] websocket must start with wss://`,
-        ),
-      );
-      process.exit(0);
-    }
-
-    this.source = source;
-    this.ws = ws;
-    this.ttl = ttl;
-    this.subscriptionMessage = subscriptionMessage;
+  get ttl(): number {
+    return 60;
   }
 
-  abstract parsePrice: (json: any) => string;
+  get subscriptionMessage(): any | null {
+    return null;
+  }
 
   private formatPrice = (raw: string): string | null => {
     if (!raw) {
@@ -87,6 +64,17 @@ abstract class AbstractTicker {
       `[${chalk.magenta('ticker')}][${chalk.yellow(this.source)}] starting`,
     );
 
+    if (this.endpoint.substr(0, 6) !== 'wss://') {
+      console.log(
+        chalk.red(
+          `[${chalk.magenta('ticker')}][${chalk.yellow(
+            this.source,
+          )}] websocket must start with wss://`,
+        ),
+      );
+      process.exit(0);
+    }
+
     const data = await redis.get(`ticker.${this.source}`);
     if (data) {
       console.error(
@@ -99,7 +87,7 @@ abstract class AbstractTicker {
       process.exit(0);
     }
 
-    const connection = new WebSocket(this.ws);
+    const connection = new WebSocket(this.endpoint);
     connection.on('open', () => {
       console.log(
         `[${chalk.magenta('ticker')}][${chalk.yellow(

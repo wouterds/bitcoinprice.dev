@@ -1,6 +1,27 @@
 import AbstractTicker from './abstract';
 
 class CoinbaseTicker extends AbstractTicker {
+  get source(): string {
+    return 'coinbase';
+  }
+
+  get endpoint(): string {
+    return 'wss://ws-feed.pro.coinbase.com';
+  }
+
+  get subscriptionMessage(): any {
+    return {
+      type: 'subscribe',
+      product_ids: ['BTC-USD'],
+      channels: [
+        {
+          name: 'ticker',
+          product_ids: ['BTC-USD'],
+        },
+      ],
+    };
+  }
+
   parsePrice = (json: any): string => {
     if (!json?.price) {
       return '';
@@ -10,19 +31,4 @@ class CoinbaseTicker extends AbstractTicker {
   };
 }
 
-const ticker = new CoinbaseTicker({
-  source: 'coinbase',
-  ws: 'wss://ws-feed.pro.coinbase.com',
-  subscriptionMessage: {
-    type: 'subscribe',
-    product_ids: ['BTC-USD'],
-    channels: [
-      {
-        name: 'ticker',
-        product_ids: ['BTC-USD'],
-      },
-    ],
-  },
-});
-
-ticker.start();
+new CoinbaseTicker().start();

@@ -21,6 +21,7 @@ class Server {
     const apiRouter = express.Router();
     apiRouter.use(middlewares.api);
     apiRouter.get('', requestHandlers.api.root);
+    apiRouter.get('/24h/minutely', requestHandlers.api.day.minutely);
     app.use('/api', apiRouter);
 
     app.listen(this._port, () => {

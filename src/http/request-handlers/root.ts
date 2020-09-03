@@ -45,6 +45,7 @@ const root = async (_req: Request, res: Response): Promise<void> => {
 
   body += 'API endpoints:\n';
   body += `    https://${process.env.API_HOST}\n`;
+  body += `    https://${process.env.API_HOST}/24h/minutely\n`;
   body += '\n';
 
   if (price) {

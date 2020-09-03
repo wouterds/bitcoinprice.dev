@@ -1,6 +1,5 @@
 import redis from 'services/redis';
-
-import Sources from '../tickers/sources';
+import Sources from 'tickers/sources';
 
 class TickerRepository {
   private ttl = 60;

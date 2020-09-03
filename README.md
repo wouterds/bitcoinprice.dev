@@ -9,8 +9,15 @@
 
 ## Setup
 
+### Environment
+
 ```bash
 cp .env.example .env
+```
+
+### Dependencies
+
+```bash
 yarn
 ```
 
@@ -37,11 +44,44 @@ yarn
 
 ```bash
 yarn lint
+```
+
+### Automatic fixing of linting errors
+
+```bash
 yarn lint:fix
 ```
 
 ## Running
 
+### Development
+
 ```bash
 yarn dev
+```
+
+#### Tickers
+
+```bash
+npx ts-node -r ./src/bootstrap.ts ./src/scripts/binance-ticker.ts
+npx ts-node -r ./src/bootstrap.ts ./src/scripts/bitfinex-ticker.ts
+npx ts-node -r ./src/bootstrap.ts ./src/scripts/bitstamp-ticker.ts
+npx ts-node -r ./src/bootstrap.ts ./src/scripts/coinbase-ticker.ts
+npx ts-node -r ./src/bootstrap.ts ./src/scripts/kraken-ticker.ts
+```
+
+### Production
+
+```bash
+yarn start
+```
+
+#### Tickers
+
+```bash
+yarn start:ticker:binance
+yarn start:ticker:bitfinex
+yarn start:ticker:bitstamp
+yarn start:ticker:coinbase
+yarn start:ticker:kraken
 ```

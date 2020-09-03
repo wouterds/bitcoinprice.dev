@@ -17,8 +17,12 @@ import TickerRepository from 'repositories/ticker';
 
     toDelete.push(average[0]);
   }
-  console.log(chalk.yellow(`Delete averages for: ${toDelete.join(', ')}`));
 
+  if (toDelete.length === 0) {
+    process.exit(0);
+  }
+
+  console.log(chalk.yellow(`Delete averages for: ${toDelete.join(', ')}`));
   repository.deleteMinutelyAverages(toDelete);
 
   process.exit(0);

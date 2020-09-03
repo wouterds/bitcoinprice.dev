@@ -10,6 +10,7 @@
     "ticker:bitstamp": "cd ./dist && node -r ./bootstrap.js ./scripts/bitstamp-ticker.js",
     "ticker:coinbase": "cd ./dist && node -r ./bootstrap.js ./scripts/coinbase-ticker.js",
     "ticker:kraken": "cd ./dist && node -r ./bootstrap.js ./scripts/kraken-ticker.js",
+    "minutely-average:sample": "cd ./dist && node -r ./bootstrap.js ./scripts/minutely-average-sample.js",
     "dev:docker:start": "docker-compose -f $(npm prefix)/.docker/docker-compose.dev.yml up -d --remove-orphans",
     "dev:node": "nodemon",
     "dev": "yarn dev:docker:start && sleep 3 && yarn dev:node",

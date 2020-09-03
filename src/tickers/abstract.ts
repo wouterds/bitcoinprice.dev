@@ -1,17 +1,19 @@
 import chalk from 'chalk';
-import redis from 'services/redis';
 import WebSocket from 'ws';
 
+import TickerRepository from '../repositories/ticker';
 import Sources from './sources';
 
 abstract class AbstractTicker {
+  private repository: TickerRepository;
+
+  constructor() {
+    this.repository = new TickerRepository();
+  }
+
   abstract get source(): Sources;
   abstract get endpoint(): string;
   abstract parsePrice: (json: any) => string;
-
-  get ttl(): number {
-    return 60;
-  }
 
   get subscriptionMessage(): any | null {
     return null;
@@ -51,8 +53,7 @@ abstract class AbstractTicker {
       return;
     }
 
-    redis.set(`ticker.${this.source}`, price, 'EX', this.ttl);
-    redis.hset('ticker', this.source, price);
+    this.repository.setPriceForSource(price, this.source);
 
     console.log(chalk.yellow(`[ticker][${this.source}] price: ${price}`));
   };
@@ -65,7 +66,7 @@ abstract class AbstractTicker {
       process.exit(0);
     }
 
-    const data = await redis.get(`ticker.${this.source}`);
+    const data = await this.repository.getPriceForSource(this.source);
     if (data) {
       console.log(
         chalk.red(`[ticker][${this.source}] is already running, abort`),

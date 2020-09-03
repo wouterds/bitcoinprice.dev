@@ -47,6 +47,10 @@ class TickerRepository {
 
     return average;
   };
+
+  addMinutelyAverage = async (time: string, average: string): Promise<void> => {
+    redis.hset('minutely', time, average);
+  };
 }
 
 export default TickerRepository;

@@ -6,7 +6,6 @@ import Sources from 'tickers/sources';
 const sources = Object.values(Sources);
 
 (async () => {
-  console.log(chalk.green('Sampling minutely average'));
   const repository = new TickerRepository();
 
   const time = roundToNearestMinutes(new Date()).getTime() / 1000;
@@ -16,7 +15,6 @@ const sources = Object.values(Sources);
   }
 
   repository.addMinutelyAverage(time.toString(), average);
-  console.log(chalk.yellow(`Saving minutely average: $${average}`));
-
+  console.log(chalk.yellow(`[minutely-average][sample] average: $${average}`));
   process.exit(0);
 })();

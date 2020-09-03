@@ -3,7 +3,6 @@ import { roundToNearestMinutes, subHours } from 'date-fns';
 import TickerRepository from 'repositories/ticker';
 
 (async () => {
-  console.log(chalk.green('Cleaning up old minutely averages'));
   const repository = new TickerRepository();
 
   const time = roundToNearestMinutes(subHours(new Date(), 24)).getTime() / 1000;
@@ -22,7 +21,9 @@ import TickerRepository from 'repositories/ticker';
     process.exit(0);
   }
 
-  console.log(chalk.yellow(`Delete averages for: ${toDelete.join(', ')}`));
+  console.log(
+    chalk.yellow(`[minutely-average][clean] averages: ${toDelete.join(', ')}`),
+  );
   repository.deleteMinutelyAverages(toDelete);
 
   process.exit(0);

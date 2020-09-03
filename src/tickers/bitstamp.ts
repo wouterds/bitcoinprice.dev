@@ -1,8 +1,9 @@
 import AbstractTicker from './abstract';
+import Sources from './sources';
 
 class BitstampTicker extends AbstractTicker {
-  get source(): string {
-    return 'bitstamp';
+  get source(): Sources {
+    return Sources.Bitstamp;
   }
 
   get endpoint(): string {
@@ -27,4 +28,4 @@ class BitstampTicker extends AbstractTicker {
   };
 }
 
-new BitstampTicker().start();
+export default BitstampTicker;

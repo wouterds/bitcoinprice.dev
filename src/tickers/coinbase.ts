@@ -1,8 +1,9 @@
 import AbstractTicker from './abstract';
+import Sources from './sources';
 
 class CoinbaseTicker extends AbstractTicker {
-  get source(): string {
-    return 'coinbase';
+  get source(): Sources {
+    return Sources.Coinbase;
   }
 
   get endpoint(): string {
@@ -31,4 +32,4 @@ class CoinbaseTicker extends AbstractTicker {
   };
 }
 
-new CoinbaseTicker().start();
+export default CoinbaseTicker;

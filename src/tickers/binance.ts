@@ -1,8 +1,9 @@
 import AbstractTicker from './abstract';
+import Sources from './sources';
 
 class BinanceTicker extends AbstractTicker {
-  get source(): string {
-    return 'binance';
+  get source(): Sources {
+    return Sources.Binance;
   }
 
   get endpoint(): string {
@@ -24,4 +25,4 @@ class BinanceTicker extends AbstractTicker {
   };
 }
 
-new BinanceTicker().start();
+export default BinanceTicker;

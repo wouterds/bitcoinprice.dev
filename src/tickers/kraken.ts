@@ -1,8 +1,9 @@
 import AbstractTicker from './abstract';
+import Sources from './sources';
 
 class KrakenTicker extends AbstractTicker {
-  get source(): string {
-    return 'kraken';
+  get source(): Sources {
+    return Sources.Kraken;
   }
 
   get endpoint(): string {
@@ -38,4 +39,4 @@ class KrakenTicker extends AbstractTicker {
   };
 }
 
-new KrakenTicker().start();
+export default KrakenTicker;

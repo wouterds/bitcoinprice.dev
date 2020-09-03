@@ -2,8 +2,10 @@ import chalk from 'chalk';
 import redis from 'services/redis';
 import WebSocket from 'ws';
 
+import Sources from './sources';
+
 abstract class AbstractTicker {
-  abstract get source(): string;
+  abstract get source(): Sources;
   abstract get endpoint(): string;
   abstract parsePrice: (json: any) => string;
 

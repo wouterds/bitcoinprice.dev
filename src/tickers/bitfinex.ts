@@ -1,8 +1,9 @@
 import AbstractTicker from './abstract';
+import Sources from './sources';
 
 class BitfinexTicker extends AbstractTicker {
-  get source(): string {
-    return 'bitfinex';
+  get source(): Sources {
+    return Sources.Bitfinex;
   }
 
   get endpoint(): string {
@@ -35,4 +36,4 @@ class BitfinexTicker extends AbstractTicker {
   };
 }
 
-new BitfinexTicker().start();
+export default BitfinexTicker;

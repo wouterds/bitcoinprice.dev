@@ -15,7 +15,7 @@ services:
       - 'traefik.http.routers.devbitcoinprice-https.rule=Host(`bitcoinprice.dev`,`api.bitcoinprice.dev`)'
       - 'traefik.http.routers.devbitcoinprice-https.tls.certresolver=myhttpchallenge'
     restart: unless-stopped
-    mem_limit: 8mb
+    mem_limit: 4mb
     networks:
       - default
       - reverse-proxy
@@ -30,7 +30,7 @@ services:
     image: redis:6
     container_name: dev.bitcoinprice--redis
     restart: unless-stopped
-    mem_limit: 8mb
+    mem_limit: 4mb
 
 networks:
   reverse-proxy:

@@ -12,3 +12,4 @@
 * * * * * cd /code && yarn ticker:coinbase > /proc/1/fd/1
 * * * * * cd /code && yarn ticker:kraken > /proc/1/fd/1
 * * * * * cd /code && yarn minutely-average:sample > /proc/1/fd/1
+* * * * * cd /code && yarn minutely-average:clean > /proc/1/fd/1

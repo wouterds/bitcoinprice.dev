@@ -52,21 +52,13 @@ abstract class AbstractTicker {
     redis.set(`ticker.${this.source}`, price, 'EX', this.ttl);
     redis.hset('ticker', this.source, price);
 
-    console.log(
-      `[${chalk.magenta('ticker')}][${chalk.yellow(
-        this.source,
-      )}] price: ${price}`,
-    );
+    console.log(chalk.yellow(`[ticker][${this.source}] price: ${price}`));
   };
 
   public start = async (): Promise<void> => {
     if (this.endpoint.substr(0, 6) !== 'wss://') {
       console.log(
-        chalk.red(
-          `[${chalk.magenta('ticker')}][${chalk.yellow(
-            this.source,
-          )}] websocket must start with wss://`,
-        ),
+        chalk.red(`[ticker][${this.source}] websocket must start with wss://`),
       );
       process.exit(0);
     }
@@ -74,43 +66,27 @@ abstract class AbstractTicker {
     const data = await redis.get(`ticker.${this.source}`);
     if (data) {
       console.log(
-        chalk.red(
-          `[${chalk.magenta('ticker')}][${chalk.yellow(
-            this.source,
-          )}] is already running, abort`,
-        ),
+        chalk.red(`[ticker][${this.source}] is already running, abort`),
       );
       process.exit(0);
     }
 
-    console.log(
-      `[${chalk.magenta('ticker')}][${chalk.yellow(this.source)}] starting`,
-    );
+    console.log(chalk.green(`[ticker][${this.source}] starting`));
 
     const connection = new WebSocket(this.endpoint);
     connection.on('open', () => {
-      console.log(
-        `[${chalk.magenta('ticker')}][${chalk.yellow(
-          this.source,
-        )}] connection opened`,
-      );
+      console.log(chalk.green(`[ticker][${this.source}] connection opened`));
 
       if (this.subscriptionMessage) {
         console.log(
-          `[${chalk.magenta('ticker')}][${chalk.yellow(
-            this.source,
-          )}] dispatch subscription message`,
+          chalk.green(`[ticker][${this.source}] dispatch subscription message`),
         );
         const message = JSON.stringify(this.subscriptionMessage);
         connection.send(message);
       }
     });
     connection.on('close', () => {
-      console.log(
-        `[${chalk.magenta('ticker')}][${chalk.yellow(
-          this.source,
-        )}] connection closed`,
-      );
+      console.log(chalk.red(`[ticker][${this.source}] connection closed`));
       process.exit(0);
     });
     connection.onmessage = this.messageHandler;

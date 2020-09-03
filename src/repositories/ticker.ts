@@ -60,6 +60,10 @@ class TickerRepository {
 
     return data;
   };
+
+  deleteMinutelyAverages = async (keys: string[]): Promise<void> => {
+    redis.hdel('minutely', keys);
+  };
 }
 
 export default TickerRepository;

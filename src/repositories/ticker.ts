@@ -51,6 +51,15 @@ class TickerRepository {
   addMinutelyAverage = async (time: string, average: string): Promise<void> => {
     redis.hset('minutely', time, average);
   };
+
+  getMinutelyAverages = async (): Promise<{ [key: string]: string }> => {
+    const data = await redis.hgetall('minutely');
+    if (!data) {
+      return {};
+    }
+
+    return data;
+  };
 }
 
 export default TickerRepository;

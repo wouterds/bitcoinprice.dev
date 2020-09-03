@@ -79,9 +79,9 @@ yarn start
 #### Tickers
 
 ```bash
-yarn start:ticker:binance
-yarn start:ticker:bitfinex
-yarn start:ticker:bitstamp
-yarn start:ticker:coinbase
-yarn start:ticker:kraken
+yarn ticker:binance
+yarn ticker:bitfinex
+yarn ticker:bitstamp
+yarn ticker:coinbase
+yarn ticker:kraken
 ```

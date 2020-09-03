@@ -6,8 +6,8 @@
 # |  |  |  |  |
 # *  *  *  *  *  command to be executed
 
-* * * * * cd /code && yarn start:ticker:binance > /proc/1/fd/1
-* * * * * cd /code && yarn start:ticker:bitfinex > /proc/1/fd/1
-* * * * * cd /code && yarn start:ticker:bitstamp > /proc/1/fd/1
-* * * * * cd /code && yarn start:ticker:coinbase > /proc/1/fd/1
-* * * * * cd /code && yarn start:ticker:kraken > /proc/1/fd/1
+* * * * * cd /code && yarn ticker:binance > /proc/1/fd/1
+* * * * * cd /code && yarn ticker:bitfinex > /proc/1/fd/1
+* * * * * cd /code && yarn ticker:bitstamp > /proc/1/fd/1
+* * * * * cd /code && yarn ticker:coinbase > /proc/1/fd/1
+* * * * * cd /code && yarn ticker:kraken > /proc/1/fd/1

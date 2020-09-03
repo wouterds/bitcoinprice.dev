@@ -5,6 +5,11 @@
   "repository": "github:wouterds/bitcoinprice.dev",
   "scripts": {
     "start": "cd ./dist && node -r ./bootstrap.js ./main.js",
+    "start:ticker:binance": "cd ./dist && node -r ./bootstrap.js ./tickers/binance.js",
+    "start:ticker:bitfinex": "cd ./dist && node -r ./bootstrap.js ./tickers/bitfinex.js",
+    "start:ticker:bitstamp": "cd ./dist && node -r ./bootstrap.js ./tickers/bitstamp.js",
+    "start:ticker:coinbase": "cd ./dist && node -r ./bootstrap.js ./tickers/coinbase.js",
+    "start:ticker:kraken": "cd ./dist && node -r ./bootstrap.js ./tickers/kraken.js",
     "dev:docker:start": "docker-compose -f $(npm prefix)/.docker/docker-compose.dev.yml up -d --remove-orphans",
     "dev:node": "nodemon",
     "dev": "yarn dev:docker:start && sleep 3 && yarn dev:node",

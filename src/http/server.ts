@@ -15,6 +15,9 @@ class Server {
   start = (): void => {
     const app = express();
 
+    // middlewares
+    app.use(cors());
+
     // regular routes
     const router = express.Router();
     router.get('/', requestHandlers.root);
@@ -27,9 +30,6 @@ class Server {
     apiRouter.get('/:source', requestHandlers.api.source);
     apiRouter.get('/24h/minutely', requestHandlers.api.day.minutely);
     app.use('/api', apiRouter);
-
-    // middlewares
-    app.use(cors());
 
     // start server
     app.listen(this._port, () => {

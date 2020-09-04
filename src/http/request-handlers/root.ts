@@ -15,14 +15,12 @@ const root = async (_req: Request, res: Response): Promise<void> => {
   body += '<script>';
   body += 'const updatePrice = () => {';
   body += `fetch(location.protocol + "//${process.env.API_HOST}").then(response => {`;
-  body += 'if (response.status !== 200) {';
-  body += 'return';
-  body += '}';
+  body += 'if (response.status !== 200) { return }';
   body += 'response.text().then(price => {';
   body += 'document.title = "1 BTC = " + price + " USD";';
-  body += 'document.getElementById("price").textContent = document.title;';
+  body += 'document.getElementById("price").textContent = price;';
   body += '})';
-  body += '}).catch(console.log);';
+  body += '}).catch(console.error);';
 
   for (const source of sources) {
     body += `fetch(location.protocol + "//${process.env.API_HOST}/${source}").then(response => {`;
@@ -34,7 +32,7 @@ const root = async (_req: Request, res: Response): Promise<void> => {
     body += 'if (!element) { return }';
     body += `element.textContent = price;`;
     body += '})';
-    body += '}).catch(console.log);';
+    body += '}).catch(console.error);';
   }
 
   body += '};';
@@ -90,7 +88,7 @@ const root = async (_req: Request, res: Response): Promise<void> => {
   body +=
     '------------------------------------------------------------------------<br>';
   body += '<br>';
-  body += `<span id="price">1 BTC = ${price} USD</span><br>`;
+  body += `1 BTC = <span id="price">${price}</span> USD<br>`;
   body += '<br>';
 
   body +=

@@ -13,7 +13,7 @@ const root = async (_req: Request, res: Response): Promise<void> => {
   body += `<title>1 BTC = ${price} USD</title>`;
   body += '</head><body>';
   body += '<script>';
-  body += `const updatePrice = () => fetch('${location.protocol}//${process.env.API_HOST}').then(response => {`;
+  body += `const updatePrice = () => fetch(location.protocol + "//${process.env.API_HOST}").then(response => {`;
   body += 'if (response.status !== 200) {';
   body += 'return';
   body += '}';

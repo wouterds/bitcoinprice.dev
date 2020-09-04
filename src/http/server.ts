@@ -1,4 +1,5 @@
 import chalk from 'chalk';
+import cors from 'cors';
 import express from 'express';
 
 import middlewares from './middlewares';
@@ -19,6 +20,7 @@ class Server {
     app.use(router);
 
     const apiRouter = express.Router();
+    apiRouter.use(cors());
     apiRouter.use(middlewares.api);
     apiRouter.get('', requestHandlers.api.root);
     apiRouter.get('/24h/minutely', requestHandlers.api.day.minutely);

@@ -12,6 +12,18 @@ const root = async (_req: Request, res: Response): Promise<void> => {
   let body = '<!DOCTYPE html><html lang=en><head><meta charset=UTF-8>';
   body += `<title>1 BTC = ${price} USD</title>`;
   body += '</head><body>';
+  body += '<script>';
+  body += `const updatePrice = () => fetch('http://localhost:4000/api').then(response => {`;
+  body += 'if (response.status !== 200) {';
+  body += 'return';
+  body += '}';
+  body += 'response.text().then(price => {';
+  body += 'document.title = "1 BTC = " + price + " USD";';
+  body += 'document.getElementById("price").textContent = document.title;';
+  body += '})';
+  body += '}).catch(console.log);';
+  body += 'setInterval(updatePrice, 1000)';
+  body += '</script>';
   body += '<pre>';
   body +=
     '   _     _ _            _                  _               _            <br>';
@@ -59,7 +71,7 @@ const root = async (_req: Request, res: Response): Promise<void> => {
   body +=
     '------------------------------------------------------------------------<br>';
   body += '<br>';
-  body += `1 BTC = ${price} USD<br>`;
+  body += `<span id="price">1 BTC = ${price} USD</span><br>`;
   body += '<br>';
 
   body +=

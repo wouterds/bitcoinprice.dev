@@ -9,65 +9,69 @@ const root = async (_req: Request, res: Response): Promise<void> => {
   const startTime = new Date().getTime();
   const price = await repository.getAveragePriceForSources(sources);
 
-  let body = '';
+  let body = '<!DOCTYPE html><html lang=en><head><meta charset=UTF-8>';
+  body += `<title>1 BTC = ${price} USD</title>`;
+  body += '</head><body>';
+  body += '<pre>';
   body +=
-    '   _     _ _            _                  _               _            \n';
+    '   _     _ _            _                  _               _            <br>';
   body +=
-    '  | |   (_) |          (_)                (_)             | |           \n';
+    '  | |   (_) |          (_)                (_)             | |           <br>';
   body +=
-    '  | |__  _| |_ ___ ___  _ _ __  _ __  _ __ _  ___ ___   __| | _____   __\n';
+    '  | |__  _| |_ ___ ___  _ _ __  _ __  _ __ _  ___ ___   __| | _____   __<br>';
   body +=
-    "  | '_ \\| | __/ __/ _ \\| | '_ \\| '_ \\| '__| |/ __/ _ \\ / _` |/ _ \\ \\ / /\n";
+    "  | '_ \\| | __/ __/ _ \\| | '_ \\| '_ \\| '__| |/ __/ _ \\ / _` |/ _ \\ \\ / /<br>";
   body +=
-    '  | |_) | | || (_| (_) | | | | | |_) | |  | | (_|  __/| (_| |  __/\\ V / \n';
+    '  | |_) | | || (_| (_) | | | | | |_) | |  | | (_|  __/| (_| |  __/\\ V / <br>';
   body +=
-    '  |_.__/|_|\\__\\___\\___/|_|_| |_| .__/|_|  |_|\\___\\___(_)__,_|\\___| \\_/  \n';
+    '  |_.__/|_|\\__\\___\\___/|_|_| |_| .__/|_|  |_|\\___\\___(_)__,_|\\___| \\_/  <br>';
   body +=
-    '                               | |                                      \n';
+    '                               | |                                      <br>';
   body +=
-    '                               |_|                                      \n';
-  body += '\n';
-  body += '    — a hyperfast realtime Bitcoin price API without rate limits\n';
-  body += '\n';
+    '                               |_|                                      <br>';
+  body += '<br>';
   body +=
-    '------------------------------------------------------------------------\n';
-  body += '\n';
-  body += 'Formula:\n';
-  body += `    (${sources.join(' + ')}) / ${sources.length}\n`;
-  body += '\n';
+    '    — a hyperfast realtime Bitcoin price API without rate limits<br>';
+  body += '<br>';
+  body +=
+    '------------------------------------------------------------------------<br>';
+  body += '<br>';
+  body += 'Formula:<br>';
+  body += `    (${sources.join(' + ')}) / ${sources.length}<br>`;
+  body += '<br>';
 
-  body += 'Exchange prices:\n';
+  body += 'Exchange prices:<br>';
   for (const source of sources) {
     const exchangePrice = await repository.getPriceForSource(source);
     if (!exchangePrice) {
       continue;
     }
 
-    body += `    ${source}: $${exchangePrice}\n`;
+    body += `    ${source}: $${exchangePrice}<br>`;
   }
-  body += '\n';
+  body += '<br>';
 
-  body += 'API endpoints:\n';
-  body += `    https://${process.env.API_HOST}\n`;
-  body += `    https://${process.env.API_HOST}/24h/minutely\n`;
-  body += '\n';
-
-  if (price) {
-    body +=
-      '------------------------------------------------------------------------\n';
-    body += '\n';
-    body += `1 BTC = ${price} USD\n`;
-    body += '\n';
-  }
-
-  const passedTime = new Date().getTime() - startTime;
+  body += 'API endpoints:<br>';
+  body += `    https://${process.env.API_HOST}<br>`;
+  body += `    https://${process.env.API_HOST}/24h/minutely<br>`;
+  body += '<br>';
 
   body +=
-    '------------------------------------------------------------------------\n';
-  body += '\n';
-  body += `page generated in ${passedTime}ms`;
+    '------------------------------------------------------------------------<br>';
+  body += '<br>';
+  body += `1 BTC = ${price} USD<br>`;
+  body += '<br>';
 
-  res.setHeader('content-type', 'text/plain');
+  body +=
+    '------------------------------------------------------------------------<br>';
+  body += '<br>';
+
+  const passedTime = new Date().getTime() - startTime;
+  body += `page generated in ${passedTime}ms`;
+  body += '</pre>';
+  body += '</body></html>';
+
+  res.setHeader('content-type', 'text/html');
   res.send(body);
 };
 

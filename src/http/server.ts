@@ -3,7 +3,6 @@ import cors from 'cors';
 import express from 'express';
 
 import middlewares from './middlewares';
-import removeTrailingSlashMiddleware from './middlewares/remove-trailing-slash';
 import requestHandlers from './request-handlers';
 
 class Server {
@@ -18,7 +17,6 @@ class Server {
 
     // middlewares
     app.use(cors());
-    app.use(removeTrailingSlashMiddleware);
 
     // regular routes
     const router = express.Router();

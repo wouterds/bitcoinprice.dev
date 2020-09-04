@@ -23,6 +23,7 @@ class Server {
     apiRouter.use(cors());
     apiRouter.use(middlewares.api);
     apiRouter.get('', requestHandlers.api.root);
+    apiRouter.get('/:source', requestHandlers.api.source);
     apiRouter.get('/24h/minutely', requestHandlers.api.day.minutely);
     app.use('/api', apiRouter);
 

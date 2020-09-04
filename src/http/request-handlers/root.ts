@@ -6,6 +6,7 @@ const sources = Object.values(Sources);
 const repository = new TickerRepository();
 
 const root = async (_req: Request, res: Response): Promise<void> => {
+  const startTime = new Date().getTime();
   const price = await repository.getAveragePriceForSources(sources);
 
   let body = '';
@@ -28,6 +29,9 @@ const root = async (_req: Request, res: Response): Promise<void> => {
   body += '\n';
   body += '    — a hyperfast realtime Bitcoin price API without rate limits\n';
   body += '\n';
+  body +=
+    '------------------------------------------------------------------------\n';
+  body += '\n';
   body += 'Formula:\n';
   body += `    (${sources.join(' + ')}) / ${sources.length}\n`;
   body += '\n';
@@ -49,8 +53,19 @@ const root = async (_req: Request, res: Response): Promise<void> => {
   body += '\n';
 
   if (price) {
-    body += `1 BTC = ${price} USD`;
+    body +=
+      '------------------------------------------------------------------------\n';
+    body += '\n';
+    body += `1 BTC = ${price} USD\n`;
+    body += '\n';
   }
+
+  const passedTime = new Date().getTime() - startTime;
+
+  body +=
+    '------------------------------------------------------------------------\n';
+  body += '\n';
+  body += `page generated in ${passedTime}ms`;
 
   res.setHeader('content-type', 'text/plain');
   res.send(body);

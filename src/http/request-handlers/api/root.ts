@@ -7,6 +7,10 @@ const repository = new TickerRepository();
 
 const root = async (_req: Request, res: Response): Promise<void> => {
   const price = await repository.getAveragePriceForSources(sources);
+  if (!price) {
+    res.sendStatus(503);
+    return;
+  }
 
   res.setHeader('content-type', 'text/plain');
   res.send(price);

@@ -15,18 +15,23 @@ class Server {
   start = (): void => {
     const app = express();
 
+    // regular routes
     const router = express.Router();
     router.get('/', requestHandlers.root);
     app.use(router);
 
+    // api routes
     const apiRouter = express.Router();
-    apiRouter.use(cors());
     apiRouter.use(middlewares.api);
     apiRouter.get('', requestHandlers.api.root);
     apiRouter.get('/:source', requestHandlers.api.source);
     apiRouter.get('/24h/minutely', requestHandlers.api.day.minutely);
     app.use('/api', apiRouter);
 
+    // middlewares
+    app.use(cors());
+
+    // start server
     app.listen(this._port, () => {
       console.log(chalk.green(`Running on http://localhost:${this._port} 🚀`));
     });

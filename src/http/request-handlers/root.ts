@@ -65,6 +65,9 @@ const root = async (_req: Request, res: Response): Promise<void> => {
 
   body += 'API endpoints:<br>';
   body += `    <a href="https://${process.env.API_HOST}">https://${process.env.API_HOST}</a><br>`;
+  for (const source of sources) {
+    body += `    <a href="https://${process.env.API_HOST}/${source}">https://${process.env.API_HOST}/${source}</a><br>`;
+  }
   body += `    <a href="https://${process.env.API_HOST}/24h/minutely">https://${process.env.API_HOST}/24h/minutely</a><br>`;
   body += '<br>';
 

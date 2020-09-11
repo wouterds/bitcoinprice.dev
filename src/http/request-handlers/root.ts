@@ -11,6 +11,17 @@ const root = async (_req: Request, res: Response): Promise<void> => {
 
   let body = '<!DOCTYPE html><html lang=en><head><meta charset=UTF-8>';
   body += `<title>1 BTC = ${price} USD</title>`;
+  body += '<style type="text/css">';
+  body += 'body { color: #333 }';
+  body += 'body a { color: #000 }';
+  body += '@media (prefers-color-scheme: dark) {';
+  body += 'body a { color: #fff }';
+  body += 'body {';
+  body += 'background-color: #272727;';
+  body += 'color: #ddd';
+  body += '}';
+  body += '}';
+  body += '</style>';
   body += '</head><body>';
   body += '<script>';
   body += 'const updatePrice = () => {';

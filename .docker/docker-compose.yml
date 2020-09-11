@@ -18,6 +18,7 @@ services:
     mem_limit: 8mb
     networks:
       - default
+      - dd
       - reverse-proxy
 
   node:
@@ -25,6 +26,9 @@ services:
     container_name: dev.bitcoinprice--node
     restart: unless-stopped
     mem_limit: 128mb
+    networks:
+      - default
+      - dd
 
   redis:
     image: redis:6
@@ -33,7 +37,12 @@ services:
     mem_limit: 8mb
     volumes:
       - ./data:/data
+    networks:
+      - default
+      - dd
 
 networks:
+  dd:
+    external: true
   reverse-proxy:
     external: true

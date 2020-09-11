@@ -25,7 +25,7 @@ services:
     image: wouterds/bitcoinprice.dev:node
     container_name: dev.bitcoinprice--node
     restart: unless-stopped
-    mem_limit: 128mb
+    mem_limit: 256mb
     networks:
       - default
       - dd

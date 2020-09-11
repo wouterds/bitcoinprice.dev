@@ -18,7 +18,6 @@ services:
     mem_limit: 8mb
     networks:
       - default
-      - dd
       - reverse-proxy
 
   node:
@@ -37,9 +36,6 @@ services:
     mem_limit: 8mb
     volumes:
       - ./data:/data
-    networks:
-      - default
-      - dd
 
 networks:
   dd:

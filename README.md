@@ -85,3 +85,9 @@ yarn ticker:bitstamp
 yarn ticker:coinbase
 yarn ticker:kraken
 ```
+
+![Screenshot](https://i.imgur.com/7ME6ykK.jpg)
+
+![Screenshot](https://i.imgur.com/cYDYzr1.jpg)
+
+![Screenshot](https://i.imgur.com/l0CKKy1.jpg)
